@@ -1,4 +1,4 @@
-.PHONY: up down restart bash artisan migrate seed logs
+.PHONY: up down restart shell artisan migrate seed logs
 
 # Start Sail containers
 up:
