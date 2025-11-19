@@ -1,4 +1,4 @@
-.PHONY: up down restart shell artisan migrate seed logs
+.PHONY: up down restart shell artisan migrate
 
 # Start Sail containers
 up:
@@ -23,10 +23,9 @@ artisan:
 migrate:
 	./vendor/bin/sail artisan migrate
 
-# Run database seeders
-seed:
-	./vendor/bin/sail artisan db:seed
-
 # Tail Laravel logs
 logs:
 	./vendor/bin/sail logs -f
+
+test:
+	./vendor/bin/sail phpunit
