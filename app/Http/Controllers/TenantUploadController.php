@@ -3,17 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TenantUploadRequest;
+use App\Services\HomeownerParser;
 use Spatie\SimpleExcel\SimpleExcelReader;
 
 class TenantUploadController extends Controller
 {
+    protected HomeownerParser $parser;
+
     public function __construct()
     {
-        $titles = Title::values();
-
-        $titlePattern = implode('|', $titles);
-
-        $jointNamePattern = '/\b('.$titlePattern.')\b\s*(?:&|and)\s*\b('.$titlePattern.')\b/i';
+        $this->parser = app(HomeownerParser::class);
     }
 
     /**
@@ -38,7 +37,10 @@ class TenantUploadController extends Controller
         $jsonData = [];
 
         foreach ($rows as $line) {
-            // send to parser
+            $discoveredTenants = $this->parser->parseEntry($line['homeowner']);
+            foreach ($discoveredTenants as $newTenant) {
+                $jsonData[] = $newTenant;
+            }
         }
 
         return response()->json([
