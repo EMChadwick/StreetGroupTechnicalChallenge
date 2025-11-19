@@ -12,7 +12,7 @@ class HomeownerParser
 
     private string $titlePattern;
 
-    private array $blankTennantEntry;
+    private array $blankTenantEntry;
 
     public function __construct()
     {
