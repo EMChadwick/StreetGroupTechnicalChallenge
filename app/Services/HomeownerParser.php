@@ -22,7 +22,7 @@ class HomeownerParser
 
         $this->jointNamePattern = '/\b('.$this->titlePattern.')\b\s*(?:&|and)\s*\b('.$this->titlePattern.')\b/i';
 
-        $this->singleNamePattern = "/\b(".$this->titlePattern.")\b\s*[\w'-.]+\s*\b\w+\b/i";
+        $this->singleNamePattern = "/\b(".$this->titlePattern.")\b\s*[\w'-.]+\s*\b[\w'-]+\b/i";
         $this->blankTenantEntry = [
             'title' => null,
             'first_name' => null,
@@ -92,6 +92,7 @@ class HomeownerParser
             } else {
                 $tenantItem['first_name'] = $first;
             }
+
             $tenantItem['last_name'] = end($tenantPieces);
             $tenantData[] = $tenantItem;
         }

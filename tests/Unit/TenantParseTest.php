@@ -24,10 +24,12 @@ class TenantParseTest extends TestCase
         $result = $this->parser->parseEntry('Mr John Smith');
 
         $expectedResult = [
-            'title' => 'Mr',
-            'first_name' => 'John',
-            'last_name' => 'Smith',
-            'initial' => null,
+            [
+                'title' => 'Mr',
+                'first_name' => 'John',
+                'last_name' => 'Smith',
+                'initial' => null,
+            ],
         ];
 
         $this->assertEquals($result, $expectedResult);
@@ -38,10 +40,27 @@ class TenantParseTest extends TestCase
         $result = $this->parser->parseEntry('Ms K Mulgrew');
 
         $expectedResult = [
-            'title' => 'Ms',
-            'first_name' => null,
-            'last_name' => 'Mulgrew',
-            'initial' => 'K',
+            [
+                'title' => 'Ms',
+                'first_name' => null,
+                'last_name' => 'Mulgrew',
+                'initial' => 'K',
+            ],
+        ];
+
+        $this->assertEquals($result, $expectedResult);
+    }
+
+    public function test_hyphenated_name_processes_correctly(): void
+    {
+        $result = $this->parser->parseEntry('Mr Daniel Day-Lewis');
+        $expectedResult = [
+            [
+                'title' => 'Mr',
+                'first_name' => 'Daniel',
+                'last_name' => 'Day-Lewis',
+                'initial' => null,
+            ],
         ];
 
         $this->assertEquals($result, $expectedResult);
@@ -84,6 +103,28 @@ class TenantParseTest extends TestCase
                 'title' => 'Mr',
                 'first_name' => 'Andrew',
                 'last_name' => 'Ryan',
+                'initial' => null,
+            ],
+        ];
+
+        $this->assertEquals($result, $expectedResult);
+    }
+
+    public function test_joint_full_name_processes_correctly(): void
+    {
+        $result = $this->parser->parseEntry('Mr and Mrs Gavin Stacey');
+
+        $expectedResult = [
+            [
+                'title' => 'Mr',
+                'first_name' => 'Gavin',
+                'last_name' => 'Stacey',
+                'initial' => null,
+            ],
+            [
+                'title' => 'Mrs',
+                'first_name' => null,
+                'last_name' => 'Stacey',
                 'initial' => null,
             ],
         ];
