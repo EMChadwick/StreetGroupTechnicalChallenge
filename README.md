@@ -10,6 +10,8 @@ A Laravel project for uploading CSV files of tenant data, parsing them, and retu
 - **Make**  (optional, for convenience)
 
 This project uses Laravel Sail, so it can run on macOS, Linux, or Windows (via WSL).
+*If using WSL, make sure Docker is running with WSL backend enabled:*
+https://learn.microsoft.com/en-us/windows/wsl/tutorials/wsl-containers
 
 ---
 
