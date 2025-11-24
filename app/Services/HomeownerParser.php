@@ -14,15 +14,14 @@ class HomeownerParser
 
     private array $blankTenantEntry;
 
-    public function __construct()
+    public function __construct(array $titles)
     {
-        $titles = Title::values();
 
         $this->titlePattern = implode('|', $titles);
 
         $this->jointNamePattern = '/\b('.$this->titlePattern.')\b\s*(?:&|and)\s*\b('.$this->titlePattern.')\b/i';
 
-        $this->singleNamePattern = "/\b(".$this->titlePattern.")\b\s*[\w'-.]+\s*\b[\w'-]+\b/i";
+        $this->singleNamePattern = "/\b(".$this->titlePattern.")\b\s*[\w'.-]+\s*\b[\w'-]+\b/i";
         $this->blankTenantEntry = [
             'title' => null,
             'first_name' => null,
