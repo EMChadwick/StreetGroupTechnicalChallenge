@@ -37,10 +37,7 @@ class TenantUploadController extends Controller
         $jsonData = [];
 
         foreach ($rows as $line) {
-            $discoveredTenants = $this->parser->parseEntry($line['homeowner']);
-            foreach ($discoveredTenants as $newTenant) {
-                $jsonData[] = $newTenant;
-            }
+            $jsonData = array_merge($jsonData, $this->parser->parseEntry($line['homeowner']));
         }
 
         return response()->json([
